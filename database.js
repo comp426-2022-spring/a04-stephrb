@@ -1,7 +1,7 @@
 import Database from "better-sqlite3";
-const logdb = new Database("log.db")
+const db = new Database("log.db")
 
-const stmt = db.prepare(`SELECT name FROM sqlite_master WHERE type='table' and name='access';`);
+const stmt = db.prepare(`SELECT name FROM sqlite_master WHERE type='table' and name='accesslog';`);
 let row = stmt.get();
 if (row == undefined) {
     console.log('Log database appears to be empty. Creating log database...');
@@ -20,8 +20,8 @@ if (row == undefined) {
             useragent VARCHAR
         );
     `
-    logdb.exec(sqlInit)
+    db.exec(sqlInit)
 } else {
     console.log('Log database exists.')
 }
-export default logdb
+export default db

@@ -65,7 +65,7 @@ app.use((req, res, next) => {
         useragent: req.headers['user-agent']
     }
     const stmt = db.prepare('INSERT INTO accesslog (remoteaddr, remoteuser, time, method, url, protocol, httpversion, status, referer, useragent) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
-    const info = stmt.run(logdata.remoteaddr, logdata.remoteuser, logdata.time, logdata.method, logdata.url, logdata.protocol, logdata.httpversion, logdata.status, logdata.referer, logdata.useragent);
+    const info = stmt.run(logData.remoteaddr, logData.remoteuser, logData.time, logData.method, logData.url, logData.protocol, logData.httpversion, logData.status, logData.referer, logData.useragent);
     next();
 })
 
@@ -73,8 +73,8 @@ app.use((req, res, next) => {
 if (args.debug) {
     app.get("/app/log/access", (req, res) => {
         try{
-            const logdata = db.prepare('SELECT * FROM accesslog').all();
-            res.status(200).json(logdata);
+            const logData = db.prepare('SELECT * FROM accesslog').all();
+            res.status(200).json(logData);
         } catch(e){
             console.error(e);
         }

@@ -24,4 +24,4 @@ if (row == undefined) {
 } else {
     console.log('Log database exists.')
 }
-module.exports = logdb
+export default logdb
